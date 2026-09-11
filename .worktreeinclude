@@ -1,0 +1,5 @@
+# git worktree 作成時に含めるファイル/ディレクトリを指定
+# 例:
+# .env
+# .claude/settings.local.json
+

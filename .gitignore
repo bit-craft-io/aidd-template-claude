@@ -1,0 +1,23 @@
+.idea
+.claude/settings.local.json
+.venv
+
+# projects/ 配下は各プロジェクトが個別gitリポジトリを持つため、
+# root repoではディレクトリの存在(.gitkeep)のみ管理する
+projects/*
+!projects/.gitkeep
+
+# Dependencies (any project, any depth)
+**/venv/
+**/__pycache__/
+**/node_modules/
+
+# Build output (any project, any depth)
+**/.next/
+**/next-env.d.ts
+**/test-results/
+
+# Local data & secrets (any project, any depth)
+**/*.db
+.env
+.env.local

@@ -1,4 +1,4 @@
-# checklist.md (ninja skill 詳細参照)
+# checklist.md (mode-ninja skill 詳細参照)
 
 ## 圧縮ルール(詳細)
 

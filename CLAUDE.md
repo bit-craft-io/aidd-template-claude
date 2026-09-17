@@ -22,6 +22,17 @@ root/
 - 汎用的でない(特定プロジェクトの都合に依る)スキルは `root/.claude/skills/` ではなく `projects/<name>/.claude/skills/` に置く。Claude Codeはネストした `.claude/skills/` も自動的に見つける
 - 現時点で確立された全プロジェクト共通の規約は特に無い。今後、複数プロジェクトに跨って繰り返し適用したい方針が固まった際に、ここへ追記する
 
+## ドキュメント運用の流れ(brainstorming-intake / CLAUDE.md / doc-spec)
+
+各プロジェクトにおける企画〜実装のドキュメントは、以下の役割分担・時系列で運用する。
+
+1. **`docs/brainstorming-intake.md`**: 大きな機能・企画の"種"となる生の材料(目標・動機、ラフな画面イメージ等)を、brainstorming**に持ち込む前**に書く。brainstorming後に内容を書き直すものではない
+2. **brainstorming**: 対話を通じて、その企画を具体的な機能単位(例: 機能A、機能B)へ分割し、方針を決める
+3. **`projects/<name>/CLAUDE.md`(プロジェクト概要・アーキテクチャ節)**: brainstormingで決まった全体像・機能への分割を記す「見取り図」。実装が進むにつれ随時更新し、各doc-specへのリンクを追記してゆく
+4. **`docs/design/<機能名>.md`(doc-spec)**: 機能A・機能Bそれぞれの実装着手前スペック。全部を先に洗い出すのではなく、機能が具体化する都度、1つずつ追加してゆく
+
+つまり、複数のdoc-spec(機能A・機能B…)が積み上がることで、より大きな機能が形作られる。その束ね役はCLAUDE.mdのプロジェクト概要・アーキテクチャ節であり、`brainstorming-intake.md`は入力記録として基本的に更新しない
+
 ## .claude配下の役割
 
 | ディレクトリ/ファイル | 役割 |

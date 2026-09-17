@@ -20,7 +20,8 @@
     ]
   },
   "enabledPlugins": {
-    "superpowers@claude-plugins-official": true,
-    "genshijin@genshijin": true
+    "adr@project-plugins": true,
+    "genshijin@project-plugins": true,
+    "superpowers@claude-plugins-official": true
   }
 }

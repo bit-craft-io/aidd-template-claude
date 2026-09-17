@@ -11,15 +11,31 @@
 
 ## セットアップ
 
-`claude-plugins-official` は既定で導入済み。以下のplugin marketplace・pluginは別途追加が必要:
+`claude-plugins-official` は既定で導入済み。<br />そこに存在するplugin(`superpowers`・
+`skill-creator`)は通常通り、そこから直接導入する:
 
 ```
-/plugin marketplace add InterfaceX-co-jp/genshijin
-
-/plugin install superpowers@claude-plugins-official
-/plugin install skill-creator@claude-plugins-official
-/plugin install genshijin
+claude plugin install   superpowers@claude-plugins-official --scope project
+claude plugin install skill-creator@claude-plugins-official --scope project
 ```
+
+一方`adr`・`genshijin`は`claude-plugins-official`に存在せぬため、`.claude-plugin/`配下に
+リポジトリを個別cloneし、それを束ねるローカルmarketplace(`project-plugins`、
+`.claude-plugin/marketplace.json`)として登録・管理する。初回セットアップ:
+
+```
+mkdir .claude-plugin
+git clone https://github.com/zircote/adr.git                .claude-plugin/adr
+git clone https://github.com/InterfaceX-co-jp/genshijin.git .claude-plugin/genshijin
+
+claude plugin marketplace add ./
+claude plugin install       adr@project-plugins --scope project
+claude plugin install genshijin@project-plugins --scope project
+```
+
+- `/plugin list` で有効化状態を確認できる。
+- `.claude-plugin/*`は、git cloneするので、gitの追跡対象外(`.gitignore`)。
+- `.claude-plugin/marketplace.json`のみgit管理する。
 
 ## 新規プロジェクトの始め方
 

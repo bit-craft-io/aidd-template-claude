@@ -15,8 +15,8 @@
 `skill-creator`)は通常通り、そこから直接導入する:
 
 ```
-claude plugin install   superpowers@claude-plugins-official --scope project
-claude plugin install skill-creator@claude-plugins-official --scope project
+claude plugin install   superpowers@claude-plugins-official --scope user
+claude plugin install skill-creator@claude-plugins-official --scope user
 ```
 
 一方`adr`・`genshijin`は`claude-plugins-official`に存在せぬため、`.claude-plugin/`配下に
@@ -29,8 +29,8 @@ git clone https://github.com/zircote/adr.git                .claude-plugin/adr
 git clone https://github.com/InterfaceX-co-jp/genshijin.git .claude-plugin/genshijin
 
 claude plugin marketplace add ./
-claude plugin install       adr@project-plugins --scope project
-claude plugin install genshijin@project-plugins --scope project
+claude plugin install       adr@project-plugins --scope user
+claude plugin install genshijin@project-plugins --scope user
 ```
 
 - `/plugin list` で有効化状態を確認できる。

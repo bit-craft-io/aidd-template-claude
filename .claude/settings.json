@@ -19,9 +19,5 @@
       }
     ]
   },
-  "enabledPlugins": {
-    "adr@project-plugins": true,
-    "genshijin@project-plugins": true,
-    "superpowers@claude-plugins-official": true
-  }
+  "enabledPlugins": {}
 }

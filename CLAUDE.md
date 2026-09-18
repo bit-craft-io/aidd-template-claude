@@ -33,6 +33,14 @@ root/
 
 つまり、複数のdoc-spec(機能A・機能B…)が積み上がることで、より大きな機能が形作られる。その束ね役はCLAUDE.mdのプロジェクト概要・アーキテクチャ節であり、`brainstorming-intake.md`は入力記録として基本的に更新しない
 
+### 画面モックアップ画像の扱い
+
+`brainstorming-intake.md` がモックアップ画像を参照している場合(参照が無い機能には本ルール適用外。例: backend APIのみで完結する機能):
+
+1. **[brainstorming/doc-spec作成時]** 該当画像をReadツールで実際に読み込み、doc-specに「画面デザイン」節を設け、配色・レイアウト・CSSトークン名等を具体的に書き出す
+2. **[brainstorming/spec self-review時]** intakeに画像参照があるのにdoc-specへ「画面デザイン」節が無い場合、これをplaceholder・欠落として扱い、ユーザーによる review gateに進める前に追記する
+3. **[writing-plans/spec self-review時]** doc-specに「画面デザイン」節が存在する場合、その内容を実装するスタイリング専用task(CSS定義・エントリポイントへのimport・見た目確認込み)をタスク分解に必ず1つ含める。節が存在するのに対応taskが無ければ、spec coverageのギャップとして扱い追加する
+
 ## .claude配下の役割
 
 | ディレクトリ/ファイル | 役割 |

@@ -19,8 +19,5 @@
       }
     ]
   },
-  "enabledPlugins": {
-    "superpowers@claude-plugins-official": true,
-    "genshijin@genshijin": true
-  }
+  "enabledPlugins": {}
 }

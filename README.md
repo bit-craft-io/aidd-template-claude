@@ -41,4 +41,5 @@ claude plugin install genshijin@project-plugins --scope user
 
 1. `/new-project <name>` で雛形を生成
 2. `projects/<name>/docs/brainstorming-intake.md` を埋める
-3. `/superpowers:brainstorming` で設計を固める
+3. `/superpowers:brainstorming` で設計を固める<br />
+Ex: /superpowers:brainstorming projects/trend-compass/docs/brainstorming-intake.md

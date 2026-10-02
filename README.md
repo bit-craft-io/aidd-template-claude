@@ -4,10 +4,11 @@
 
 ## 構成
 
-- `CLAUDE.md` — Claude Code向けの規約(リポジトリ構成・.claude配下の役割等)
-- `.claude/skills/` — 全プロジェクト共通のskill(`new-project`等)
-- `docs/templates/` — 新規プロジェクト立ち上げ用の雛形
-- `projects/<name>/` — 個々のプロジェクト(詳細は各自のREADME.md/CLAUDE.mdを参照)
+- `CLAUDE.md` — Claude Code向けの文脈(プロジェクト概要・.claude配下の役割等)
+- `.claude/skills/` — 全プロジェクト共通のskill(`jira`・`doc-spec`等)
+- `.claude/rules/base-rules.md` — 全プロジェクト共通の絶対ルール(追記しない)
+- `docs/templates/` — brainstorming-intake・doc-specの雛形
+- `docs/decisions/` — ADRのテンプレートと、意思決定の記録
 
 ## セットアップ
 
@@ -39,7 +40,18 @@ claude plugin install genshijin@project-plugins --scope user
 
 ## 新規プロジェクトの始め方
 
-1. `/new-project <name>` で雛形を生成
-2. `docs/brainstorming-intake.md` を埋める
+このリポジトリ(aidd-template-claude)をコピーして作る。コピー後は、そのプロジェクトの持ち物で、
+ひな形の更新は自動では届かない。
+
+1. コピーして、`.git` を作り直す。コピー元の記録も残す:
+   ```
+   cp -r aidd-template-claude <name>
+   cd <name> && rm -rf .git .claude/settings.local.json
+   printf 'source: aidd-template-claude\ncommit: <コピー元の git rev-parse --short HEAD>\ndate: <YYYY-MM-DD>\n' > .claude/TEMPLATE_VERSION
+   git init
+   ```
+   `git init` のあと、コピー元と同じ `user.name` / `user.email` を、明示的に設定する(引き継がれない)。
+2. `docs/templates/brainstorming-intake.md` を `docs/brainstorming-intake.md` にコピーして、埋める
 3. `/superpowers:brainstorming` で設計を固める<br />
 Ex: /superpowers:brainstorming docs/brainstorming-intake.md
+4. `CLAUDE.md` の「プロジェクト概要」以降を、brainstorming の結果で埋める

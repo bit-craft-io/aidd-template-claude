@@ -43,14 +43,14 @@ claude plugin install genshijin@project-plugins --scope user
 このリポジトリ(aidd-template-claude)をコピーして作る。コピー後は、そのプロジェクトの持ち物で、
 ひな形の更新は自動では届かない。
 
-1. コピーして、`.git` を作り直す。コピー元の記録も残す:
+1. コピーして、`.git` を作り直す:
    ```
    cp -r aidd-template-claude <name>
    cd <name> && rm -rf .git .claude/settings.local.json
-   printf 'source: aidd-template-claude\ncommit: <コピー元の git rev-parse --short HEAD>\ndate: <YYYY-MM-DD>\n' > .claude/TEMPLATE_VERSION
    git init
    ```
    `git init` のあと、コピー元と同じ `user.name` / `user.email` を、明示的に設定する(引き継がれない)。
+   `.claude/TEMPLATE_VERSION` の `commit`(コピー元で `git rev-parse --short HEAD`)と `date` を、コピーした時点の値に書き換える。
 2. `docs/templates/brainstorming-intake.md` を `docs/brainstorming-intake.md` にコピーして、埋める
 3. `/superpowers:brainstorming` で設計を固める<br />
 Ex: /superpowers:brainstorming docs/brainstorming-intake.md

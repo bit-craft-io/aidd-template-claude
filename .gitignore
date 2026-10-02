@@ -3,11 +3,6 @@
 .claude-plugin
 .venv
 
-# projects/ 配下は各プロジェクトが個別gitリポジトリを持つため、
-# root repoではディレクトリの存在(.gitkeep)のみ管理する
-projects/*
-!projects/.gitkeep
-
 # .claude-plugin/配下、plugin本体は個別git repoとしてcloneしており、
 # submodule化を避けるため追跡対象外とする(marketplace.jsonのみ管理)
 .claude-plugin/*

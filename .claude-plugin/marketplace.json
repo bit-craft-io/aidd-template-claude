@@ -1,0 +1,19 @@
+{
+  "name": "project-plugins",
+  "owner": {
+    "name": "other"
+  },
+  "plugins": [
+    {
+      "name": "adr",
+      "source": "./.claude-plugin/adr",
+      "description": "アーキテクチャ決定記録（ADR）のライフサイクル管理"
+    },
+    {
+      "name": "genshijin",
+      "source": "./.claude-plugin/genshijin",
+      "description": "超圧縮コミュニケーションスキル"
+    }
+  ]
+}
+

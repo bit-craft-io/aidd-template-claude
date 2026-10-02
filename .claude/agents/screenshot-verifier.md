@@ -37,7 +37,7 @@ tools: Bash, Read, Glob, Grep
 
 ## 未整備の点(利用するプロジェクト側で埋めること)
 
-- 実際の撮影手段(Playwright等の導入)は各 `projects/<name>/` 側の技術
+- 実際の撮影手段(Playwright等の導入)は各プロジェクト側の技術
   スタックに依存するため、ここでは定めない
 - 汎用的でないプロジェクト固有の起動作法は、このagentを複製・拡張して
-  `projects/<name>/.claude/agents/` 側に個別定義することを推奨する
+  プロジェクトの `.claude/agents/` に個別定義することを推奨する

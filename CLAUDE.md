@@ -11,6 +11,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - このプロジェクト独自のルール: `.claude/rules/` に別ファイルを追加して書く
 - どの時点のひな形からコピーしたかは、`.claude/TEMPLATE_VERSION` に記す(コピー時に書く。README 参照)
 
+## 前提のプラグイン
+
+このプロジェクトは、Claude Code のプラグイン `superpowers`(brainstorming・writing-plans・subagent-driven-development など)と
+`skill-creator` を前提にする。未導入だと、`/superpowers:brainstorming` や、`superpowers:*` を使う手順
+(`.claude/skills/jira-exec` など)が動かない。未導入のときは、次を実行する:
+
+```
+claude plugin install   superpowers@claude-plugins-official --scope user
+claude plugin install skill-creator@claude-plugins-official --scope user
+```
+
+`adr`・`genshijin` の導入は、README の「セットアップ」を参照。導入状況は、`/plugin list` で確認できる。
+
 ## プロジェクト概要
 
 (brainstorming で固めた後に記載)

@@ -7,6 +7,7 @@
 - `CLAUDE.md` — Claude Code向けの文脈(プロジェクト概要・.claude配下の役割等)
 - `.claude/skills/` — 全プロジェクト共通のskill(`jira`・`doc-spec`等)
 - `.claude/rules/base-rules.md` — 全プロジェクト共通の絶対ルール(追記しない)
+- `.claude/rules/jira.md`・`git.md`・`design-addenda.md` — 話題ごとの運用の規則(Jira、git、決定の記録)
 - `docs/templates/` — brainstorming-intake・doc-spec・ADRの雛形
 - `docs/decisions/` — 意思決定の記録。直下はプロジェクト固有のADR(採用後は書き換えない)、`shared/` はひな形から引き継ぐ共通の決定(書き換え可)
 

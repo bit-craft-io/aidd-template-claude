@@ -201,9 +201,9 @@ MCPツールは遅延ロードのため、使う前に ToolSearch で読み込�
 ### サイトとプロジェクト
 
 - サイト: `bit-craft.atlassian.net`、cloudId `fed3f05c-806a-46ad-b6d9-c2e15e025186`
-- `AIDDS`(名前 aidd-scrum、スクラム): 計画のタスクの登録先。ボード `AIDDS board`(ID 2、種類 simple)。スプリントで運用する
-- `AIDDK`(名前 aidd-kanban、カンバン): カンバンのタスクの登録先。ボード `AIDDK board`(ID 4、種類 simple)。Jira のカンバンでは、バックログと To Do を、API から区別できないため、スプリントを ON にして、スプリントで運用する(2026-10-05)
-- `HUDDK`(名前 hudd-kanban、カンバン): 人が行う作業用のスペース。ボード `HUDDK board`(ID 5、種類 simple)。スプリントを使わない、純粋なカンバン(このボードは、スプリントをサポートしない。2026-10-08 に確認)。`/jira-exec` の対象外。課題タイプは、`タスク`・`エピック`・`ストーリー`・`Feature`・`バグ`・`Subtask`(2026-10-08 に確認)
+- `AIDDS`(名前 aidd-scrum、スクラム): ボード `AIDDS board`(ID 2、種類 simple)。スプリントで運用する
+- `AIDDK`(名前 aidd-kanban、カンバン): ボード `AIDDK board`(ID 4、種類 simple)。Jira のカンバンでは、バックログと To Do を、API から区別できないため、スプリントを ON にして、スプリントで運用する(2026-10-05)
+- `HUDDK`(名前 hudd-kanban、カンバン): ボード `HUDDK board`(ID 5、種類 simple)。スプリントを使わない、純粋なカンバン(このボードは、スプリントをサポートしない。2026-10-08 に確認)。課題タイプは、`タスク`・`エピック`・`ストーリー`・`Feature`・`バグ`・`Subtask`(2026-10-08 に確認)
 - プロジェクトの用途と、振り分けの基準は、`.claude/rules/jira.md`(ここには、Jira で観察した設定を書く)
 - 旧プロジェクト `SCRUM`(名前 aidd)は、削除済み(存在しない)
 - 課題タイプの名前(日本語): `タスク`、`エピック`

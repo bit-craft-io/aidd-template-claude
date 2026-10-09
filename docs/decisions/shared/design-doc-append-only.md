@@ -4,7 +4,7 @@
 
 ## 背景・課題
 
-会話ベースの開発では、仕様の変更や、仕様漏れの補いが、会話の中で決まる。これをリポジトリに残さないと、設計書を読んでも今の仕様が分からなくなる(出典: `.claude/rules/record-decisions.md`)。
+会話ベースの開発では、仕様の変更や、仕様漏れの補いが、会話の中で決まる。これをリポジトリに残さないと、設計書を読んでも今の仕様が分からなくなる(出典: `.claude/rules/design-addenda.md`)。
 
 承認済みの設計書を直接書き換えると、何を合意したかが追えなくなる点も、同ルールの「元の本文は、合意した内容」から読み取れる。ただし、書き換えを避ける理由として明記されているわけではない(要確認)。
 
@@ -29,4 +29,4 @@
 
 - `c15c753` docs(rules): record decisions in the repo and never rewrite an approved design doc(2026-10-06)
 - `5956391` feat(skills): add the send-back flow to jira-exec and keep approved design docs append-only(2026-10-06)
-- `.claude/rules/record-decisions.md`
+- `.claude/rules/design-addenda.md`(旧名: `record-decisions.md`)

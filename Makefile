@@ -1,6 +1,7 @@
 # Usage: make new NAME=my-project [DEST=..] [YES=1]
 #
 # Copies this template into $(DEST)/$(NAME), without the template's .git.
+# The target may be absent or an empty directory (e.g. made by root with `install -d`).
 # It shows the target path and asks for confirmation first (Enter = yes).
 # It does not touch git in the new project. Run git init yourself (see README).
 
@@ -30,15 +31,20 @@ help: ## Show this help
 	@printf '\nExample:\n  make new NAME=my-project\n'
 
 .PHONY: new
+.SILENT: new
 new: ## Copy this template into DEST/NAME (without .git)
 	@test -n "$(NAME)" || { echo "Error: NAME is required. Usage: make new NAME=my-project"; exit 1; }
-	@test ! -e "$(TARGET)" || { echo "Error: $(TARGET) already exists."; exit 1; }
+	@if [ -e "$(TARGET)" ]; then \
+	  { [ -d "$(TARGET)" ] && [ -z "$$(ls -A "$(TARGET)")" ]; } \
+	    || { echo "Error: $(TARGET) already exists and is not an empty directory."; exit 1; }; \
+	fi
 	@echo "Project will be created at: $(TARGET)"
 	@if [ -z "$(YES)" ]; then \
-	  read -r -p "Continue? [Y/n] " ans; \
+	  read -r -p "Create it? [Y/n] " ans; \
 	  case "$$ans" in ""|[Yy]|[Yy][Ee][Ss]) ;; *) echo "Aborted."; exit 1;; esac; \
 	fi
-	cp -r "$(SRC)" "$(TARGET)"
+	mkdir -p "$(TARGET)"
+	cp -r "$(SRC)/." "$(TARGET)/"
 	rm -rf "$(TARGET)/.git" "$(TARGET)/.claude/settings.local.json"
 	sed -i "s/^commit:.*/commit: $$(git rev-parse --short HEAD)/; \
 	        s/^date:.*/date: $$(date +%F)/" \

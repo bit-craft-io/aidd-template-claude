@@ -44,15 +44,27 @@ claude plugin install genshijin@project-plugins --scope user
 このリポジトリ(aidd-template-claude)をコピーして作る。コピー後は、そのプロジェクトの持ち物で、
 ひな形の更新は自動では届かない。
 
-1. コピーして、`.git` を作り直す:
+1. ひな形のディレクトリで、`make new` を実行する(`make` だけで、使い方が出る):
    ```
-   cp -r aidd-template-claude <name>
-   cd <name> && rm -rf .git .claude/settings.local.json
-   git init
+   make new NAME=<name>            # ひな形の隣(../<name>)に作る
+   make new NAME=<name> DEST=<dir> # <dir>/<name> に作る
    ```
-   `git init` のあと、コピー元と同じ `user.name` / `user.email` を、明示的に設定する(引き継がれない)。
-   `.claude/TEMPLATE_VERSION` の `commit`(コピー元で `git rev-parse --short HEAD`)と `date` を、コピーした時点の値に書き換える。
-2. `docs/templates/brainstorming-intake.md` を `docs/brainstorming-intake.md` にコピーして、埋める
-3. `/superpowers:brainstorming` で設計を固める<br />
+   作る場所を示して、確認(Y/n。Enter で進む)を取る。`YES=1` を付けると、確認を飛ばす。
+   `make new` がするのは、複製のみ。ひな形の `.git` と `.claude/settings.local.json` は、複製に含めない。
+   `.claude/TEMPLATE_VERSION` の `commit` と `date` は、コピー元の値で書かれる。
+   `docs/templates/brainstorming-intake.md` は、`docs/brainstorming-intake.md` に写される。
+2. 新しいプロジェクトで、git を整える(`make new` は、git に触れない):
+   ```
+   cd <name>
+   git init -b main
+   git config user.name  "<名前>"
+   git config user.email "<メール>"
+   git add -A && git commit -m "chore: init from aidd-template-claude"
+   git branch develop
+   ```
+   最初のコミットのみ、`main` に置く(`develop` を作るには、コミットが要るため)。以後は、`develop` から切った `feature/YYYYMMDD` で作業する(`.claude/rules/git.md`)。
+   `origin` を足す場合は、続けて `git remote add origin <url>` を行う。
+3. `docs/brainstorming-intake.md` を埋める
+4. `/superpowers:brainstorming` で設計を固める<br />
 Ex: /superpowers:brainstorming docs/brainstorming-intake.md
-4. `CLAUDE.md` の「プロジェクト概要」以降を、brainstorming の結果で埋める
+5. `CLAUDE.md` の「プロジェクト概要」以降を、brainstorming の結果で埋める

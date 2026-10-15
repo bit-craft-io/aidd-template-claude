@@ -1,0 +1,3 @@
+source: aidd-template-claude
+commit: (コピー時に記入。コピー元で git rev-parse --short HEAD)
+date: (コピー時に記入。YYYY-MM-DD)

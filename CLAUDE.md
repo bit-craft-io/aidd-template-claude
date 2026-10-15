@@ -2,25 +2,40 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## リポジトリ構成
+このリポジトリは、AI駆動開発のひな形(aidd-template-claude)である。コピーして新しいプロジェクトを作り、
+以後は、そのプロジェクトの持ち物として育てる。ひな形の更新は、コピーしたプロジェクトへ自動では届かない。
 
-このリポジトリは複数プロジェクトを収める入れ物であり、各プロジェクトは `projects/<name>/` の下に独立して置かれる。
+## ルール
+
+- ひな形から引き継いだ絶対ルール(ドキュメント運用・ブランチ運用): `.claude/rules/base-rules.md`(追記しない)
+- ひな形から引き継いだ、話題ごとの運用の規則: `.claude/rules/jira.md`(Jira)、`.claude/rules/git.md`(git)、`.claude/rules/record-decisions.md`(決定の記録)
+- このプロジェクト独自のルール: `.claude/rules/` に別ファイルを追加して書く
+- どの時点のひな形からコピーしたかは、`.claude/TEMPLATE_VERSION` に記す(コピー時に書く。README 参照)
+
+## 前提のプラグイン
+
+このプロジェクトは、Claude Code のプラグイン `superpowers`(brainstorming・writing-plans・subagent-driven-development など)と
+`skill-creator` を前提にする。未導入だと、`/superpowers:brainstorming` や、`superpowers:*` を使う手順
+(`.claude/skills/jira-exec` など)が動かない。未導入のときは、次を実行する:
 
 ```
-root/
-├── CLAUDE.md          # このファイル。全プロジェクト共通の規約・方針のみを記す
-├── .claude/            # 全プロジェクトで共有する汎用スキル・エージェント・コマンド
-│   └── skills/          # プロジェクトに依存しない汎用的な技のみ
-└── projects/
-    └── <name>/
-        ├── CLAUDE.md        # そのプロジェクト固有の文脈(概要・技術スタック・コマンド等)
-        ├── .claude/skills/  # そのプロジェクト固有の技があれば、ここに置く
-        └── ...               # 実装コード一式
+claude plugin install   superpowers@claude-plugins-official --scope user
+claude plugin install skill-creator@claude-plugins-official --scope user
 ```
 
-- 特定プロジェクトの説明・技術スタック・ビルド手順は、このファイルではなく各 `projects/<name>/CLAUDE.md` に書く
-- 汎用的でない(特定プロジェクトの都合に依る)スキルは `root/.claude/skills/` ではなく `projects/<name>/.claude/skills/` に置く。Claude Codeはネストした `.claude/skills/` も自動的に見つける
-- 現時点で確立された全プロジェクト共通の規約は特に無い。今後、複数プロジェクトに跨って繰り返し適用したい方針が固まった際に、ここへ追記する
+`adr`・`genshijin` の導入は、README の「セットアップ」を参照。導入状況は、`/plugin list` で確認できる。
+
+## プロジェクト概要
+
+(brainstorming で固めた後に記載)
+
+## ビルド・テスト・起動
+
+(実装後に記載)
+
+## アーキテクチャ
+
+(brainstorming で決めた構成を記載)
 
 ## .claude配下の役割
 
@@ -38,4 +53,5 @@ root/
 
 ## Git管理
 
-`projects/` は root repo の追跡対象から外れて居る(`.gitignore`参照)。**各 `projects/<name>/` は、それぞれ独立した git リポジトリ**として個別に管理する(`projects/<name>/`直下に其々の`.git`を持つ)。root repo のコミット・ブランチ操作は、`projects/`配下のプロジェクトには一切影響せぬ。新規プロジェクトを追加する際は、`projects/<name>/`を作った上で其の中で個別に`git init`すること。
+このひな形をコピーして作ったプロジェクトは、それぞれ独立した git リポジトリとして管理する。
+コピー後は、コピー元の `.git` を引き継がず、`git init` し直す。

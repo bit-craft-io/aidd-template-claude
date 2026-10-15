@@ -9,18 +9,15 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR/.claude/hooks/inject-skill.sh\" samurai"
+            "command": "\"$CLAUDE_PROJECT_DIR/.claude/hooks/inject-skill.sh\" mode-samurai"
           },
           {
             "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR/.claude/hooks/inject-skill.sh\" bushido"
+            "command": "\"$CLAUDE_PROJECT_DIR/.claude/hooks/inject-skill.sh\" mode-bushido"
           }
         ]
       }
     ]
   },
-  "enabledPlugins": {
-    "superpowers@claude-plugins-official": true,
-    "genshijin@genshijin": true
-  }
+  "enabledPlugins": {}
 }

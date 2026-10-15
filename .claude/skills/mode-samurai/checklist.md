@@ -1,4 +1,4 @@
-# checklist.md (samurai skill 詳細参照)
+# checklist.md (mode-samurai skill 詳細参照)
 
 ## ルール(詳細)
 

@@ -17,7 +17,7 @@
 make rag-up                 # DB・Ollama・MCP サーバを起動し、bge-m3 を用意する(GPU を使うなら: make rag-up GPU=1)
 make rag-ingest             # docs/ を取り込む(PROJECT=名前、DOCS=場所 で変えられる)
 make rag-status             # DB に入っている物(プロジェクト・種類ごとの件数)を見る
-make rag-search Q="問い"    # 近い断片を探す(K=件数、PROJECT=名前、TYPE=adr|design|plan|shared|other)
+make rag-search Q="問い"    # 近い断片を探す(K=件数、PROJECT=名前、TYPE=adr|shared|design|plan|other。TYPE を省くと、判断(adr と shared)から探す)
 make rag-eval               # 質問集で、検索の当たりを測る(QFILE=質問集、K=件数)
 make rag-mcp-check          # MCP サーバの手順(初期化 → ツールの一覧 → 検索)を、通しで確かめる
 make rag-test               # 単体テスト(DB・Ollama が無ければ、DB を使う分は、飛ばされる)
@@ -34,7 +34,7 @@ make rag-destroy            # 止めて、データも消す(確認あり)
 
 | ツール | 働き |
 |---|---|
-| `search_knowledge` | 問いに近い断片を、出所つきで返す(`doc_type`・`project` で絞れる) |
+| `search_knowledge` | 問いに近い断片を、出所つきで返す(`doc_type`・`project` で絞れる。`doc_type` を省くと、判断(`adr` と `shared`)から返す。設計書・計画書は、`design`・`plan` を指定して引く) |
 | `get_document` | 文書の全文を返す |
 | `list_sources` | 取り込み済みの、プロジェクト・種類ごとの件数とコミット |
 

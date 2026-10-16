@@ -12,7 +12,7 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("question", help="問い")
     ap.add_argument("--project", help="このプロジェクトの断片だけを探す")
-    ap.add_argument("--doc-type", help="adr / design / plan / shared / other のみ")
+    ap.add_argument("--doc-type", help="adr / shared / design / plan / other のみ(省くと、adr と shared から返す)")
     ap.add_argument("--k", type=int, default=5, help="返す件数(既定 5)")
     ap.add_argument("--json", action="store_true", help="JSON で出す")
     ap.add_argument("--full", action="store_true", help="本文の全体を出す")

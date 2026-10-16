@@ -65,7 +65,9 @@ def main(argv=None):
         rows, table = [], []
         with rag.connect() as conn:
             for q in qs:
-                hits = rag.search(conn, q["q"], a.project, None, a.k)
+                # 狙いから種別を決めて引く運用に合わせ、出典の種別で絞る(出典の無い問いは、省く=既定の範囲)
+                dt = rag.doc_type_of(q["sources"][0]) if q["sources"] else None
+                hits = rag.search(conn, q["q"], a.project, dt, a.k)
                 paths = [h.path for h in hits]
                 if q["sources"]:
                     rank = rank_of(q["sources"], paths)

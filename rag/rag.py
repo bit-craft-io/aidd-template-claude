@@ -214,14 +214,18 @@ _SEARCH_SQL = """
 SELECT content, metadata, 1 - (embedding <=> %s::vector) AS score
 FROM knowledge
 WHERE (%s::text IS NULL OR metadata->>'project' = %s::text)
-  AND (%s::text IS NULL OR metadata->>'doc_type' = %s::text)
+  AND metadata->>'doc_type' = ANY(%s::text[])
 ORDER BY embedding <=> %s::vector
 LIMIT %s
 """
 
 
+# doc_type を省いた検索の範囲。判断(プロジェクトの ADR と、共通の決定)から返す。設計書・計画書は、種別を指定して引く
+DEFAULT_DOC_TYPES = ("adr", "shared")
+
+
 def search(conn, question, project=None, doc_type=None, k=5, embed_fn=None):
-    """問いに近い断片を、近い順に k 件返す。project・doc_type で、絞り込める。"""
+    """問いに近い断片を、近い順に k 件返す。project で絞れる。doc_type を省くと、判断(adr・shared)から返す。"""
     if not question.strip():
         raise ValueError("問いが空である")
     embed_fn = embed_fn or embed
@@ -229,7 +233,8 @@ def search(conn, question, project=None, doc_type=None, k=5, embed_fn=None):
     with conn.transaction():
         with conn.cursor() as cur:
             cur.execute("SET LOCAL hnsw.ef_search = 100")
-            cur.execute(_SEARCH_SQL, (qv, project, project, doc_type, doc_type, qv, k))
+            types = [doc_type] if doc_type else list(DEFAULT_DOC_TYPES)
+            cur.execute(_SEARCH_SQL, (qv, project, project, types, qv, k))
             rows = cur.fetchall()
     return [
         Hit(

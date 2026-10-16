@@ -127,9 +127,11 @@ class SearchTest(unittest.TestCase):
         self.conn = _conn_or_skip()
         self.d = tempfile.TemporaryDirectory()
         write_docs(self.d.name, {
-            "neko.md": "# 猫\n猫の話です。\n",
-            "inu.md": "# 犬\n犬の話です。\n",
-            "tori.md": "# 鳥\n鳥の話です。\n",
+            "decisions/adr-0001-neko.md": "# 猫\n猫の話です。\n",
+            "decisions/shared/inu.md": "# 犬\n犬の話です。\n",
+            "design/tori.md": "# 鳥\n鳥の話です。\n",
+            "superpowers/plans/uma.md": "# 馬\n馬の話です。\n",
+            "memo.md": "# 虫\n虫の話です。\n",
         })
         rag.ingest(self.conn, self.d.name, "unittest-s1", embed_fn=axis_embed)
         rag.ingest(self.conn, self.d.name, "unittest-s2", embed_fn=axis_embed)
@@ -143,7 +145,7 @@ class SearchTest(unittest.TestCase):
 
     def test_nearest_is_first_with_source(self):
         hits = rag.search(self.conn, "猫について", k=3, embed_fn=axis_embed)
-        self.assertEqual(hits[0].path, "neko.md")
+        self.assertEqual(hits[0].path, "decisions/adr-0001-neko.md")
         self.assertEqual(hits[0].heading, "猫")
         self.assertAlmostEqual(hits[0].score, 1.0, places=3)
         self.assertGreaterEqual(hits[0].score, hits[-1].score)
@@ -158,7 +160,22 @@ class SearchTest(unittest.TestCase):
 
     def test_doc_type_filter(self):
         hits = rag.search(self.conn, "猫", doc_type="adr", k=10, embed_fn=axis_embed)
-        self.assertEqual(hits, [])  # 取り込んだ物は、全て other
+        self.assertTrue(hits)
+        self.assertTrue(all(h.doc_type == "adr" for h in hits))
+
+    def test_default_is_adr_and_shared_only(self):
+        hits = rag.search(self.conn, "鳥", k=20, embed_fn=axis_embed)
+        self.assertEqual({h.doc_type for h in hits}, {"adr", "shared"})
+
+    def test_explicit_design_is_returned(self):
+        hits = rag.search(self.conn, "鳥", doc_type="design", k=20, embed_fn=axis_embed)
+        self.assertTrue(hits)
+        self.assertTrue(all(h.doc_type == "design" for h in hits))
+
+    def test_explicit_plan_is_returned(self):
+        hits = rag.search(self.conn, "馬", doc_type="plan", k=20, embed_fn=axis_embed)
+        self.assertTrue(hits)
+        self.assertTrue(all(h.doc_type == "plan" for h in hits))
 
     def test_empty_question_is_rejected(self):
         with self.assertRaises(ValueError):

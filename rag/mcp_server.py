@@ -41,7 +41,9 @@ def search_knowledge(
 
     Args:
         query: 問い。日本語の文でよい(例: 「このテーブルの列を、なぜ、この型にしたのか」)。
-        doc_type: adr / design / plan / shared / other のいずれかで絞る(任意)。
+        doc_type: adr / shared / design / plan / other のいずれか一つで絞る(任意)。
+            省くと、判断(adr と shared)から返す。設計書(design)・計画書(plan)は、指定して引く。
+            狙いで選ぶ: なぜ→adr(組織共通は shared)、何を作る→design、手順→plan。決められぬ問いは、引かずに問い直す。
         project: プロジェクト名で絞る(任意)。
         k: 返す件数(1〜20。既定 5)。
     """

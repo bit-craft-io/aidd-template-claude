@@ -1,55 +1,30 @@
-# Usage: make new NAME=my-project [DEST=..] [YES=1]
+# Usage: make <target> [VAR=value]   (`make` alone shows the list)
 #
-# Copies this template into $(DEST)/$(NAME), without the template's .git.
-# The target may be absent or an empty directory (e.g. made by root with `install -d`).
-# It shows the target path and asks for confirmation first (Enter = yes).
-# It does not touch git in the new project. Run git init yourself (see README).
+# Commands live in make.d/*.mk, one file per topic.
+# To add a topic: create make.d/<topic>.mk, then add one include line below.
+#   - A target with a trailing "## description" shows up in `make help`.
+#   - Variables and examples are documented in the same .mk:
+#       #@vars <topic>          heading of the variable list
+#       #@var NAME description  one variable
+#       #@example <command>     one example
 
 SHELL := /bin/bash
-
-# Ignore NAME from the environment (often set to the hostname); accept it only on the command line.
-ifneq ($(origin NAME),command line)
-NAME :=
-endif
-
-DEST   ?= ..
-SRC    := $(CURDIR)
-TARGET := $(abspath $(DEST)/$(NAME))
-
 .DEFAULT_GOAL := help
 
+# ========================================
+# include
+# ----------------------------------------
+include make.d/template.mk   # Copy this template into a new project (make new)
+
+# ========================================
+# command
+# ----------------------------------------
 .PHONY: help
 help: ## Show this help
 	@printf 'Usage: make <target> [VAR=value]\n\n'
 	@printf 'Targets:\n'
 	@grep -hE '^[a-zA-Z_-]+:.*## ' $(MAKEFILE_LIST) \
 	  | sed -E 's/^([a-zA-Z_-]+):.*## (.*)/  \1\t\2/'
-	@printf '\nVariables (for "new"):\n'
-	@printf '  NAME\tProject directory name (required)\n'
-	@printf '  DEST\tParent directory (default: ..)\n'
-	@printf '  YES\tSet to 1 to skip the confirmation prompt\n'
-	@printf '\nExample:\n  make new NAME=my-project\n'
-
-.PHONY: new
-.SILENT: new
-new: ## Copy this template into DEST/NAME (without .git)
-	@test -n "$(NAME)" || { echo "Error: NAME is required. Usage: make new NAME=my-project"; exit 1; }
-	@if [ -e "$(TARGET)" ]; then \
-	  { [ -d "$(TARGET)" ] && [ -z "$$(ls -A "$(TARGET)")" ]; } \
-	    || { echo "Error: $(TARGET) already exists and is not an empty directory."; exit 1; }; \
-	fi
-	@echo "Project will be created at: $(TARGET)"
-	@if [ -z "$(YES)" ]; then \
-	  read -r -p "Create it? [Y/n] " ans; \
-	  case "$$ans" in ""|[Yy]|[Yy][Ee][Ss]) ;; *) echo "Aborted."; exit 1;; esac; \
-	fi
-	mkdir -p "$(TARGET)"
-	cp -r "$(SRC)/." "$(TARGET)/"
-	rm -rf "$(TARGET)/.git" "$(TARGET)/.claude/settings.local.json"
-	sed -i "s/^commit:.*/commit: $$(git rev-parse --short HEAD)/; \
-	        s/^date:.*/date: $$(date +%F)/" \
-	  "$(TARGET)/.claude/TEMPLATE_VERSION"
-	test -e "$(TARGET)/docs/brainstorming-intake.md" \
-	  || cp "$(TARGET)/docs/templates/brainstorming-intake.md" "$(TARGET)/docs/brainstorming-intake.md"
-	@echo "Created: $(TARGET)"
-	@echo "Next: cd $(TARGET), then set up git (see README)."
+	@awk '/^#@vars /{sub(/^#@vars /, ""); printf "\nVariables (for \"%s\"):\n", $$0; next} \
+	  /^#@var /{n = $$2; t = substr($$0, index($$0, n) + length(n) + 1); printf "  %s\t%s\n", n, t}' $(MAKEFILE_LIST)
+	@awk '/^#@example /{if (!h) {printf "\nExample:\n"; h = 1} sub(/^#@example /, ""); print "  " $$0}' $(MAKEFILE_LIST)

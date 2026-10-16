@@ -9,6 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - ひな形から引き継いだ絶対ルール(ドキュメント運用・ブランチ運用): `.claude/rules/base-rules.md`(追記しない)
 - ひな形から引き継いだ、話題ごとの運用の規則: `.claude/rules/jira.md`(Jira)、`.claude/rules/git.md`(git)、`.claude/rules/adr.md`(判断の記録)、`.claude/rules/design-addenda.md`(設計書の追記)
+- 過去の判断の引き当て(RAG)の規則: `.claude/rules/rag.md`
 - このプロジェクト独自のルール: `.claude/rules/` に別ファイルを追加して書く
 - どの時点のひな形からコピーしたかは、`.claude/TEMPLATE_VERSION` に記す(コピー時に書く。README 参照)
 

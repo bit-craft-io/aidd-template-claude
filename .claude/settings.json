@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [],
+    "deny": []
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR/.claude/hooks/inject-skill.sh\" mode-samurai"
+          },
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR/.claude/hooks/inject-skill.sh\" mode-bushido"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {}
+}

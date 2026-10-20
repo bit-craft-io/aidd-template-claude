@@ -1,0 +1,24 @@
+.idea
+.claude/settings.local.json
+.claude-plugin
+.venv
+
+# .claude-plugin/配下、plugin本体は個別git repoとしてcloneしており、
+# submodule化を避けるため追跡対象外とする(marketplace.jsonのみ管理)
+.claude-plugin/*
+!.claude-plugin/marketplace.json
+
+# Dependencies (any project, any depth)
+**/venv/
+**/__pycache__/
+**/node_modules/
+
+# Build output (any project, any depth)
+**/.next/
+**/next-env.d.ts
+**/test-results/
+
+# Local data & secrets (any project, any depth)
+**/*.db
+.env
+.env.local

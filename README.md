@@ -13,9 +13,11 @@
 
 ## セットアップ
 
-`claude-plugins-official` は既定で導入済み。<br />そこに存在するplugin(`superpowers`・
-`skill-creator`)は通常通り、そこから直接導入する:
-
+`claude-plugins-official` は既定で導入済み。<br />そこに存在するplugin(`superpowers`・`skill-creator`)は通常通り、そこから直接導入する:
+```
+# 未導入のPCのみ(`claude plugin marketplace list` に無いとき)
+claude plugin marketplace add anthropics/claude-plugins-official
+```
 ```
 claude plugin install   superpowers@claude-plugins-official --scope user
 claude plugin install skill-creator@claude-plugins-official --scope user
